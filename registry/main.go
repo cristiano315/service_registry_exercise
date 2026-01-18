@@ -65,7 +65,7 @@ func (r *Registry) Deregister(args *Args, reply *bool) error {
 		}
 	}
 
-	// Se la slice è vuota dopo la rimozione, puliamo la mappa
+	// If the slice is empty after removal, delete the service name entry
 	if len(r.services[args.Name]) == 0 {
 		delete(r.services, args.Name)
 	}
