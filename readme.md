@@ -16,3 +16,4 @@ Both services register to the registry on startup. They shut down and deregister
 
 All the networking is done through docker's internal network, so the nodes must all run on the same machine.
 You can use docker compose logs -f to see the logs while the containers are running.
+You can also test the app with multiple instances of each service, by using flags in Docker Compose. For example, you can use this command: docker-compose up -d --scale weather-service=3 --scale client=2 --scale counter-service=2 to test the app with 2 clients, 2 weather services, and 3 counter services. You will see that the clients will cycle the servers and the counter will be shared across the 2 counter servers.
