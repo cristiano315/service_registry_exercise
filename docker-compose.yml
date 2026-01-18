@@ -1,0 +1,45 @@
+services:
+  registry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: registry
+    ports:
+      - "1234:1234"
+
+  weather-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: weather
+    depends_on:
+      - registry
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - redis-data:/data
+  
+  counter-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: counter
+    depends_on:
+      - registry
+      - redis
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: client
+    depends_on:
+      - registry
+      - weather-service
+
+volumes:
+  redis-data:
