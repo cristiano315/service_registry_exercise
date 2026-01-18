@@ -1,7 +1,9 @@
 This app is a simple example of a distributed, containerized architecture, including:
+
 - A service registry, for service discovery
 - A client which connects to the service registry
 - 2 Sample services, one with state and one stateless.
+
 The app is fully containerized and uses docker and docker compose. To run it, make sure to have docker and docker compose installed on your system. If you have both installed, you can run the app by navigating to the root directory and executing the command "docker compose up". Make sure to add the flag --build for the first time, so that docker can create the containers.
 All services use the integrated Go RPC to communicate.
 registry: a simple registry, which holds the addresses and names of the registered services. It has a register, deregister, and a discover procedure.
